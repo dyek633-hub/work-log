@@ -3,6 +3,7 @@ import { Badge } from '../../components/Badge'
 import { Button } from '../../components/Button'
 import { Input } from '../../components/Input'
 import { Modal } from '../../components/Modal'
+import { TrashIcon } from '../../components/icons/TrashIcon'
 import { getTagColor } from '../../lib/tagColor'
 import { ConfirmDialog } from './ConfirmDialog'
 
@@ -64,8 +65,8 @@ export function TagManagerModal({ open, onClose, tags, onRename, onDelete }: Tag
                   >
                     <Badge variant={getTagColor(tag)} size="sm">{tag}</Badge>
                   </button>
-                  <Button variant="ghost" size="sm" onClick={() => setDeleteTarget(tag)}>
-                    삭제
+                  <Button variant="ghost" size="sm" onClick={() => setDeleteTarget(tag)} aria-label="삭제">
+                    <TrashIcon />
                   </Button>
                 </div>
               ),

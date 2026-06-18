@@ -3,6 +3,7 @@ import { Badge } from '../../components/Badge'
 import { Button } from '../../components/Button'
 import { Card } from '../../components/Card'
 import type { WorkLogEntry } from '../../types/workLog'
+import { TrashIcon } from '../../components/icons/TrashIcon'
 import { ConfirmDialog } from './ConfirmDialog'
 
 export interface TrashSectionProps {
@@ -47,8 +48,8 @@ export function TrashSection({ entries, onRestore, onPermanentDelete }: TrashSec
                   <Button variant="ghost" size="sm" onClick={() => onRestore(entry.id)}>
                     복원
                   </Button>
-                  <Button variant="ghost" size="sm" onClick={() => setConfirmId(entry.id)}>
-                    영구 삭제
+                  <Button variant="ghost" size="sm" onClick={() => setConfirmId(entry.id)} aria-label="영구 삭제">
+                    <TrashIcon />
                   </Button>
                 </div>
               </div>

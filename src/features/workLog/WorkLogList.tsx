@@ -4,6 +4,7 @@ import { Button } from '../../components/Button'
 import { Card } from '../../components/Card'
 import type { WorkLogEntry } from '../../types/workLog'
 import { getTagColor } from '../../lib/tagColor'
+import { TrashIcon } from '../../components/icons/TrashIcon'
 import { ConfirmDialog } from './ConfirmDialog'
 
 export interface WorkLogListProps {
@@ -47,8 +48,8 @@ export function WorkLogList({ entries, onEdit, onDelete }: WorkLogListProps) {
               <Button variant="ghost" size="sm" onClick={() => onEdit(entry.id)}>
                 수정
               </Button>
-              <Button variant="ghost" size="sm" onClick={() => setConfirmId(entry.id)}>
-                삭제
+              <Button variant="ghost" size="sm" onClick={() => setConfirmId(entry.id)} aria-label="삭제">
+                <TrashIcon />
               </Button>
             </div>
           </div>
