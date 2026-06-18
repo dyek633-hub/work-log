@@ -1,6 +1,7 @@
 import { useId, useRef, useState } from 'react'
 import type { KeyboardEvent } from 'react'
 import { Badge } from '../../components/Badge'
+import { getTagColor } from '../../lib/tagColor'
 
 export interface TagSelectProps {
   availableTags: string[]
@@ -71,12 +72,12 @@ export function TagSelect({ availableTags, selectedTags, onChange, onManageTags 
       <div ref={containerRef} className="relative">
         <div className="flex flex-wrap items-center gap-1.5 w-full min-h-10 rounded-lg border border-neutral-300 bg-white px-2.5 py-1.5 focus-within:border-primary-500 focus-within:ring-2 focus-within:ring-primary-500">
           {selectedTags.map((tag) => (
-            <Badge key={tag} variant="primary" size="sm">
+            <Badge key={tag} variant={getTagColor(tag)} size="sm">
               {tag}
               <button
                 type="button"
                 onClick={() => removeTag(tag)}
-                className="ml-1 text-primary-700 hover:text-primary-900"
+                className="ml-1 opacity-60 hover:opacity-100"
                 aria-label={`${tag} 제거`}
               >
                 ×

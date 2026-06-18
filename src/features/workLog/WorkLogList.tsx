@@ -3,6 +3,7 @@ import { Badge } from '../../components/Badge'
 import { Button } from '../../components/Button'
 import { Card } from '../../components/Card'
 import type { WorkLogEntry } from '../../types/workLog'
+import { getTagColor } from '../../lib/tagColor'
 import { ConfirmDialog } from './ConfirmDialog'
 
 export interface WorkLogListProps {
@@ -35,7 +36,7 @@ export function WorkLogList({ entries, onEdit, onDelete }: WorkLogListProps) {
               {entry.tags.length > 0 && (
                 <div className="flex flex-wrap gap-1.5">
                   {entry.tags.map((tag) => (
-                    <Badge key={tag} variant="primary" size="sm">
+                    <Badge key={tag} variant={getTagColor(tag)} size="sm">
                       {tag}
                     </Badge>
                   ))}
