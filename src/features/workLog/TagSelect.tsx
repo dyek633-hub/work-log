@@ -104,9 +104,9 @@ export function TagSelect({ availableTags, selectedTags, onChange, onManageTags 
                 type="button"
                 onMouseDown={(e) => e.preventDefault()}
                 onClick={() => addTag(tag)}
-                className="block w-full px-3 py-2 text-left text-sm text-neutral-700 hover:bg-neutral-50"
+                className="flex items-center w-full px-3 py-2 text-left hover:bg-neutral-50"
               >
-                {tag}
+                <Badge variant={getTagColor(tag)} size="sm">{tag}</Badge>
               </button>
             ))}
             {canCreate && (

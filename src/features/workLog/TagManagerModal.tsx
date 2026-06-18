@@ -1,7 +1,9 @@
 import { useState } from 'react'
+import { Badge } from '../../components/Badge'
 import { Button } from '../../components/Button'
 import { Input } from '../../components/Input'
 import { Modal } from '../../components/Modal'
+import { getTagColor } from '../../lib/tagColor'
 import { ConfirmDialog } from './ConfirmDialog'
 
 export interface TagManagerModalProps {
@@ -58,9 +60,9 @@ export function TagManagerModal({ open, onClose, tags, onRename, onDelete }: Tag
                   <button
                     type="button"
                     onClick={() => startEdit(tag)}
-                    className="flex-1 text-left text-sm text-neutral-800"
+                    className="flex-1 text-left"
                   >
-                    {tag}
+                    <Badge variant={getTagColor(tag)} size="sm">{tag}</Badge>
                   </button>
                   <Button variant="ghost" size="sm" onClick={() => setDeleteTarget(tag)}>
                     삭제
