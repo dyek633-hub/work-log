@@ -14,48 +14,58 @@ export interface TrashSectionProps {
 
 export function TrashSection({ entries, onRestore, onPermanentDelete }: TrashSectionProps) {
   const [confirmId, setConfirmId] = useState<string | null>(null)
+  const [isOpen, setIsOpen] = useState(false)
 
   const sorted = [...entries].sort((a, b) => (b.deletedAt ?? 0) - (a.deletedAt ?? 0))
 
   return (
     <div className="mt-10">
-      <h2 className="text-sm font-semibold text-neutral-700 mb-3 flex items-center gap-2">
-        휴지통
+      <button
+        onClick={() => setIsOpen((prev) => !prev)}
+        className="flex items-center gap-2 text-sm font-semibold text-neutral-700 hover:text-neutral-900 transition-colors mb-3"
+      >
+        <img src="/trash.png" alt="휴지통" className="w-5 h-5 object-contain" />
+        <span>휴지통</span>
         <Badge variant="neutral" size="sm">{entries.length}</Badge>
-      </h2>
+        <span className="text-xs text-neutral-400 font-normal">{isOpen ? '▲' : '▼'}</span>
+      </button>
 
-      {sorted.length === 0 ? (
-        <p className="text-sm text-neutral-400">휴지통이 비어 있습니다.</p>
-      ) : (
-        <div className="flex flex-col gap-3">
-          {sorted.map((entry) => (
-            <Card key={entry.id} padding="sm" className="bg-neutral-50">
-              <div className="flex items-start justify-between gap-3">
-                <div className="flex-1">
-                  <p className="text-xs font-medium text-neutral-400 mb-1.5">{entry.date}</p>
-                  <p className="text-sm text-neutral-500 whitespace-pre-wrap mb-2">{entry.content}</p>
-                  {entry.tags.length > 0 && (
-                    <div className="flex flex-wrap gap-1.5">
-                      {entry.tags.map((tag) => (
-                        <Badge key={tag} variant="secondary" size="sm">
-                          {tag}
-                        </Badge>
-                      ))}
+      {isOpen && (
+        <>
+          {sorted.length === 0 ? (
+            <p className="text-sm text-neutral-400">휴지통이 비어 있습니다.</p>
+          ) : (
+            <div className="flex flex-col gap-3">
+              {sorted.map((entry) => (
+                <Card key={entry.id} padding="sm" className="bg-neutral-50">
+                  <div className="flex items-start justify-between gap-3">
+                    <div className="flex-1">
+                      <p className="text-xs font-medium text-neutral-400 mb-1.5">{entry.date}</p>
+                      <p className="text-sm text-neutral-500 whitespace-pre-wrap mb-2">{entry.content}</p>
+                      {entry.tags.length > 0 && (
+                        <div className="flex flex-wrap gap-1.5">
+                          {entry.tags.map((tag) => (
+                            <Badge key={tag} variant="secondary" size="sm">
+                              {tag}
+                            </Badge>
+                          ))}
+                        </div>
+                      )}
                     </div>
-                  )}
-                </div>
-                <div className="flex gap-2">
-                  <Button variant="ghost" size="sm" onClick={() => onRestore(entry.id)}>
-                    복원
-                  </Button>
-                  <Button variant="ghost" size="sm" onClick={() => setConfirmId(entry.id)} aria-label="영구 삭제">
-                    <TrashIcon />
-                  </Button>
-                </div>
-              </div>
-            </Card>
-          ))}
-        </div>
+                    <div className="flex gap-2">
+                      <Button variant="ghost" size="sm" onClick={() => onRestore(entry.id)}>
+                        복원
+                      </Button>
+                      <Button variant="ghost" size="sm" onClick={() => setConfirmId(entry.id)} aria-label="영구 삭제">
+                        <TrashIcon />
+                      </Button>
+                    </div>
+                  </div>
+                </Card>
+              ))}
+            </div>
+          )}
+        </>
       )}
 
       <ConfirmDialog
