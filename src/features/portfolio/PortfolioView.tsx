@@ -36,8 +36,8 @@ export function PortfolioView({ entries }: PortfolioViewProps) {
           <CardBody>
             <ul className="flex flex-col gap-2.5">
               {group.entries.map((entry) => (
-                <li key={entry.id} className="text-sm text-neutral-700">
-                  <span className="text-neutral-400 mr-2">{entry.date}</span>
+                <li key={entry.id} className="flex flex-col gap-0.5 text-sm text-neutral-700">
+                  <span className="text-neutral-400">{entry.date}</span>
                   <span className="whitespace-pre-wrap">{entry.content}</span>
                 </li>
               ))}
